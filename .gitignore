@@ -1,0 +1,13 @@
+node_modules/
+playwright-report/
+allure-results/
+allure-report/
+test-results/
+
+# Auth state — generated at runtime, never commit
+tests/fixtures/.auth/*.json
+
+# Env with real secrets
+.env.prod
+.env.staging
+.env.*.local

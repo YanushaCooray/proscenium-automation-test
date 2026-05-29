@@ -1,0 +1,25 @@
+{
+  "name": "proscenium-playwright-tests",
+  "version": "1.0.0",
+  "description": "Playwright E2E Framework for Proscenium V2",
+  "scripts": {
+    "clean:allure": "node -e \"const fs=require('fs');['allure-results','allure-report'].forEach(d=>{if(fs.existsSync(d)){fs.rmSync(d,{recursive:true,force:true});console.log('Cleared: '+d);}});\"",
+    "allure:generate": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report",
+
+    "test:bvt":        "npm run clean:allure && playwright test --grep @bvt --project=bvt && npm run allure:generate && npm run allure:open",
+    "test:regression": "npm run clean:allure && playwright test --grep @regression --project=regression-chromium --project=regression-firefox && npm run allure:generate && npm run allure:open",
+    "test":            "npm run clean:allure && playwright test && npm run allure:generate && npm run allure:open",
+
+    "test:headed":  "playwright test --headed",
+    "test:debug":   "playwright test --debug",
+    "test:bvt:ci":  "npm run clean:allure && playwright test --grep @bvt --project=bvt",
+    "test:regression:ci": "npm run clean:allure && playwright test --grep @regression"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.44.0",
+    "allure-playwright": "^3.0.0",
+    "allure-commandline": "^2.29.0",
+    "dotenv": "^16.4.5"
+  }
+}
